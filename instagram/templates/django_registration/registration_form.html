@@ -1,0 +1,55 @@
+{%extends "registration/base.html"%} {% load bootstrap5 %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+      <p> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h1 class="text-center">Instagram</h1>
+          <h4 class="text-muted text-center">Sign Up to see photos and videos <br>from your friends.</h4>
+          <a><img src="/static/pics/facebookreg.png" alt="Facebook Signin"></a>
+        </div>
+        <div class="panel-body">
+          <p>OR</p>
+          <form action="/accounts/register/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary" value="Sign Up">
+            </div>
+
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+
+
+        </div>
+        <div class="login account border-top pt-3">
+          Have an account? <a href="/accounts/login">Log in</a>
+        </div>
+        <div class="extra mt-3">
+          <p class="text-center pt-3">Get the app.</p>
+          <div class="regicons">
+            <a><img src="/static/pics/appstore.png" alt="App Store"></a>
+            <a><img src="/static/pics/playstorereg.png" alt="Playstore Store"></a>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+
+  </div>
+</div>
+
+{% endblock %}
