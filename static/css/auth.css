@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@import url("http://fonts.cdnfonts.com/css/billabong");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+}
+html {
+    font-size: 10px;
+    box-sizing: border-box;
+  }
+  a {
+    text-decoration: none;
+  }
+h1 {
+  font-family: "Billabong", sans-serif;
+  font-size: 60px;
+}
+.hr5 {
+  border: 0;
+  border-top: grey;
+  height: 1px;
+  margin: 20px 80px;
+  overflow: visible;
+  padding: 0;
+  color: black;
+  text-align: center;
+}
+.hr5::after {
+  content: "OR";
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.6rem;
+  padding: 0 0.3em;
+  background: white;
+  color: black;
+}
+.signup {
+  margin: 1rem 0 1.5rem;
+  height: 1cm;
+  width:8cm;
+  background-color: #3897f0;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.login, .main{
+    border: 1px solid black;
+    justify-content: center;
+    align-content: center;
+    text-align: center;    
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center!important;
+    text-align: start;
+    padding: 0 100px !important
+}
+form input{
+    height: 1cm;
+    width: 8cm !important; 
+}
+
+#wrapper > .container {
+  display: flex;
+  padding: 0 8rem;
+}
+.regicons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.regicons img{
+    height: 1cm;
+    width: 2.8cm;
+}
+
+
+

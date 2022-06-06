@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import re_path,include
 from django_registration.backends.one_step.views import RegistrationView
-
+from django.contrib.auth import views as auth_views 
 
 urlpatterns = [
    re_path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
           name='django_registration_register'),
    re_path('accounts/', include('django_registration.backends.one_step.urls')),
    re_path('accounts/', include('django.contrib.auth.urls')),
-   re_path('',include('instagram.urls'))
+   re_path('',include('instagram.urls')),
+   re_path('logout/',auth_views.LogoutView.as_view(template_name = 'registration/login.html'), name = 'logout')
 ]
