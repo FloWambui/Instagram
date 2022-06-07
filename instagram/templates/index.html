@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="blog-section">
-    <div class="container mt-5">
+<section class="feed-section">
+    <div class="container posts mt-5">
         <div class="row">
-            <div class="col-md-2 col-lg-2"></div>
+            
             {% for image in images %}
+            <div class="col-md-2 col-lg-2"></div>
             <div class="col-md-8 col-lg-8">
                 <div class="card mb-4">
                     <div class="d-flex justify-content-start m-2">
                         <div>
                             <a href="">
-                                <img src="/static/pics/Instagram-Icon.png"
-                                    alt="" class="user-avatar border-radius" style="height:1.2cm; width:1,2cm;">
+                                <img src="/static/pics/Instagram-Icon.png" alt="" class="user-avatar border-radius"
+                                    style="height:1.2cm; width:1,2cm;">
                             </a>
                         </div>
                         <div class="text-center mt-1">
-                            <a href=>
+                            <a href="">
                                 <h6><small>{{ image.profile.user.username }} </small></h6>
                             </a>
                         </div>
                     </div>
-                    <img src="{{ image.image.url }}" class="card-img-top" alt="News Image">
+                    <img src="{{ image.image.url }}" class="card-img-top" alt="Display Image">
                     <div class="card-body">
                         <small>
                             <div class="d-flex justify-content-start">
@@ -40,14 +41,14 @@
                         <a href="">
                             <p class="fade-item">{{image.like_count }} Likes <br>View All {{image.comment_count }}
                                 Comments</p>
-                            <h6 class="">{{ image.image_caption|slice:":20" }}<small><span class="text-muted">...Read
-                                        More</span></small> </h6>
+                            <h6 class="">{{ image.image_caption }}</h6>
                         </a>
                     </div>
                 </div>
             </div>
+            <div class="col-md-2"></div>
             {% endfor %}
-            <div class="col-md-2 col-lg-2"></div>
+        
         </div>
     </div>
 </section>
