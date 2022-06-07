@@ -65,7 +65,7 @@ class CommentsTestCase(TestCase):
         Image.objects.all().delete
         Comments.objects.all().delete
     
-    def test_save_comment(self):
+    def test_save_method(self):
         self.comment.save_comment()
         comments = Comments.objects.all()
         self.assertTrue(len(comments) > 0)

@@ -4,4 +4,4 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return HttpResponse('Instagram Page')
+    return render(request, 'index.html')
