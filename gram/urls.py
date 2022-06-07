@@ -29,5 +29,6 @@ urlpatterns = [
    re_path('accounts/', include('django_registration.backends.one_step.urls')),
    re_path('accounts/', include('django.contrib.auth.urls')),
    re_path('',include('instagram.urls')),
-   re_path('logout/',auth_views.LogoutView.as_view(template_name = 'registration/login.html'), name = 'logout')
+   re_path('logout/',auth_views.LogoutView.as_view(template_name = 'registration/login.html'), name = 'logout'),
+   re_path('password-change/', auth_views.PasswordResetView.as_view(), name='password_change'),
 ]

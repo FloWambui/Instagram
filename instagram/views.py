@@ -1,11 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from .models import  Image, Comments, Likes, Profile, User
-from .forms import NewUserForm
+from .forms import NewUserForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import PasswordChangeView
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 def register_request(request):
 	if request.method == "POST":
@@ -51,15 +58,76 @@ def index(request):
     return render(request, 'index.html', {'images': images})
 
 
-def user_profile(request, id):
-    # check if user exists
-    if User.objects.filter(id=id).exists():
-        # get the user
-        user = User.objects.get(id=id)
-        # get all the images for the user
-        images = Image.objects.filter(user_id=id)
-        # get the profile of the user
-        profile = Profile.objects.filter(user_id=id).first()
-        return render(request, 'user-profile.html', {'images': images, 'profile': profile, 'user': user})
+@login_required
+def profile(request):
+  current_user = request.user
+  images = Image.objects.filter(user_id = current_user.id).all()
+  profile = Profile.objects.filter(user_id=current_user.id).first()
+  
+  return render(request,'profile.html',{"images":images,"profile":profile})
+
+
+class PasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'users/change_password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('users-home')
+
+@login_required()
+def update_profile(request):
+    if request.method == 'POST':
+
+        current_user = request.user
+
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        email = request.POST['email']
+
+        bio = request.POST['bio']
+
+        profile_image = request.FILES['profile_pic']
+        profile_image = cloudinary.uploader.upload(profile_image)
+        profile_url = profile_image['url']
+
+        user = User.objects.get(id=current_user.id)
+
+        # check if user exists in profile table and if not create a new profile
+        if Profile.objects.filter(user_id=current_user.id).exists():
+
+            profile = Profile.objects.get(user_id=current_user.id)
+            profile.profile_photo = profile_url
+            profile.bio = bio
+            profile.save()
+        else:
+            profile = Profile(user_id=current_user.id,profile_photo=profile_url, bio=bio)
+            profile.save_profile()
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.username = username
+        user.email = email
+
+        user.save()
+
+        return redirect('/profile', {'success': 'Profile Updated Successfully'})
+
+        # return render(request, 'profile.html', {'success': 'Profile Updated Successfully'})
     else:
-        return redirect('/')
+        return render(request, 'profile.html', {'danger': 'Profile Update Failed'})
+
+@login_required()
+def save_image(request):
+    if request.method == 'POST':
+        image_name = request.POST['image_name']
+        image_caption = request.POST['image_caption']
+        image_file = request.FILES['image_file']
+        image_file = cloudinary.uploader.upload(image_file)
+        image_url = image_file['url']
+        image_public_id = image_file['public_id']
+        image = Image(image_name=image_name, image_caption=image_caption, image=image_url,
+                      profile_id=request.POST['user_id'], user_id=request.POST['user_id'])
+        image.save_image()
+        return redirect('/profile', {'success': 'Image Uploaded Successfully'})
+        # return render(request, 'profile.html', {'success': 'Image Uploaded Successfully'})
+    else:
+        return render(request, 'profile.html', {'danger': 'Image Upload Failed'})

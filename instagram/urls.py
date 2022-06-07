@@ -8,6 +8,7 @@ urlpatterns=[
     re_path("register", views.register_request, name="register"),
     re_path("login", views.login_request, name="login"),
     re_path("logout", views.logout_request, name= "logout"),
-    re_path("profile", views.index,name = 'homepage'),
-    re_path('user/<int:id>/', views.user_profile, name='user.profile'),
+    re_path('profile/update/', views.update_profile, name='update.profile'),
+    re_path('profile/', views.profile, name='profile'),     
+    re_path('upload/add/', views.save_image, name='save.image')
 ]
