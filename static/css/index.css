@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@import url("http://fonts.cdnfonts.com/css/billabong");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+.navbar-brand {
+  font-family: "Billabong", sans-serif;
+  font-size: 30px;
+}
+.navicons {
+  display: flex !important;
+  justify-content: flex-end !important; 
+}
+.search-form{
+    margin-left:250px;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+}
+.navicons i{
+    font-size: 18px;
+}
