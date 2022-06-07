@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'gram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
+        'NAME': 'gramclone',
         'USER': 'moringa',
         'PASSWORD':'Access',
     }

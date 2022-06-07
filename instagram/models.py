@@ -6,14 +6,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Image(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='images',default=0)
     image = CloudinaryField('image')
     image_name = models.CharField(max_length=50)
     image_caption = models.TextField()
     image_date = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    profile = models.ForeignKey(User, on_delete=models.CASCADE)   
 
     def save_image(self):
         self.save()
