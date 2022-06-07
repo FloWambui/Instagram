@@ -1,6 +1,7 @@
 {%extends "registration/base.html"%} {% load bootstrap5 %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
 <div class="container">
   <div class="row">
     <!-- Empty div -->
@@ -22,7 +23,7 @@
             </p>
             <form action="/accounts/register/" method="post">
               {% csrf_token %}
-              {% bootstrap_form form %}
+              {{ form|crispy }} 
               <div class="form-group">
                 <input type="submit" class="btn btn-primary signup" value="Sign Up">
               </div>
