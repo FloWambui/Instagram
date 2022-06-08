@@ -131,3 +131,19 @@ def save_image(request):
         # return render(request, 'profile.html', {'success': 'Image Uploaded Successfully'})
     else:
         return render(request, 'profile.html', {'danger': 'Image Upload Failed'})
+
+
+
+def search_results(request):
+    if 'profile' in request.GET and request.GET["profile"]:
+        search_term = request.GET.get("profile")
+        searched_images = Profile.search_by_category(search_term)
+        message = f"{search_term}"
+    
+
+        return render(request, 'search.html', {"message": message, "profiles": searched_images})
+
+    else:
+    
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})

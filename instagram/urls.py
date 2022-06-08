@@ -10,5 +10,6 @@ urlpatterns=[
     re_path("logout", views.logout_request, name= "logout"),
     re_path('profile/update/', views.update_profile, name='update.profile'),
     re_path('profile/', views.profile, name='profile'),     
-    re_path('upload/add/', views.save_image, name='save.image')
+    re_path('upload/add/', views.save_image, name='save.image'),
+    re_path(r'^search/', views.search_results, name='search_results'),
 ]
