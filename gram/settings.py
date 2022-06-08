@@ -21,6 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+# adding config
+cloudinary.config( 
+  cloud_name = "flowambui", 
+  api_key = "223871825289445", 
+  api_secret = "mVXg7vALtkWComzR68K1HKsaO-Q" 
+)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9y6%7=2-5ng&6=div^3$y)@w9+vaut@*gq%(b46#z&@l5gfnxl'
 
@@ -131,7 +138,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = None
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -140,17 +149,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Configure Django App for Heroku.
-django_on_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# adding config
-cloudinary.config( 
-  cloud_name = "flowambui", 
-  api_key = "223871825289445", 
-  api_secret = "mVXg7vALtkWComzR68K1HKsaO-Q" 
-)
+
+# Configure Django App for Heroku.
+django_on_heroku.settings(locals())
