@@ -18,7 +18,7 @@ html {
     text-decoration: none;
   }
 h1 {
-  font-family: "Billabong", sans-serif;
+  font-family: "Billabong", sans-serif !important;
   font-size: 60px;
 }
 .hr5 {

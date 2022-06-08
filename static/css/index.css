@@ -10,7 +10,7 @@ body {
   font-size: 14px;
 }
 .navbar-brand {
-  font-family: "Billabong", sans-serif;
+  font-family: "Billabong", sans-serif !important;
   font-size: 30px;
 }
 .navicons {
